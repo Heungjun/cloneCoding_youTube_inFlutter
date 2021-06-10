@@ -1,4 +1,8 @@
-import 'package:ccd_youtube_flutter/controller/app_controller.dart';
+import 'package:ccd_youtube_flutter/src/controller/app_controller.dart';
+import 'package:ccd_youtube_flutter/src/pages/explore.dart';
+import 'package:ccd_youtube_flutter/src/pages/home.dart';
+import 'package:ccd_youtube_flutter/src/pages/library.dart';
+import 'package:ccd_youtube_flutter/src/pages/subscribe.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -9,7 +13,21 @@ class App extends GetView<AppController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      body: Obx(() {
+        switch (RouteName.values[controller.currentIndex.value]) {
+          case RouteName.Home:
+            return Home();
+          case RouteName.Explore:
+            return Explore();
+          case RouteName.Add:
+            break;
+          case RouteName.Subscribe:
+            return Subscribe();
+          case RouteName.Library:
+            return Library();
+        }
+        return Container();
+      }),
       bottomNavigationBar: Obx(
         () => BottomNavigationBar(
           type: BottomNavigationBarType.fixed,

@@ -1,4 +1,4 @@
-import 'package:ccd_youtube_flutter/controller/app_controller.dart';
+import 'package:ccd_youtube_flutter/src/controller/app_controller.dart';
 import 'package:get/get.dart';
 
 class InitBinding implements Bindings {

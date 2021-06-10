@@ -1,5 +1,5 @@
-import 'package:ccd_youtube_flutter/binding/init_binding.dart';
 import 'package:ccd_youtube_flutter/src/app.dart';
+import 'package:ccd_youtube_flutter/src/binding/init_binding.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
