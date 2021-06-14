@@ -1,32 +1,55 @@
+import 'package:ccd_youtube_flutter/src/controller/video_controller.dart';
 import 'package:ccd_youtube_flutter/src/models/video.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-class VideoWidget extends StatelessWidget {
+class VideoWidget extends StatefulWidget {
   final Video video;
   const VideoWidget({Key? key, required this.video}) : super(key: key);
+
+  @override
+  _VideoWidgetState createState() => _VideoWidgetState();
+}
+
+class _VideoWidgetState extends State<VideoWidget> {
+  late VideoController _videoController;
+
+  @override
+  void initState() {
+    _videoController = Get.put(VideoController(video: widget.video),
+        tag: widget.video.id!.videoId);
+    super.initState();
+  }
 
   Widget _thumbnail() {
     return Container(
       height: 250,
       color: Colors.grey.withOpacity(0.5),
       child: Image.network(
-        video.snippet!.thumbnails!.medium!.url!,
+        widget.video.snippet!.thumbnails!.medium!.url!,
         fit: BoxFit.fitWidth,
       ),
     );
   }
 
   Widget _simpleDetailInfo() {
+    @override
+    void initState() {
+      Get.put(VideoController(video: widget.video),
+          tag: widget.video.id!.videoId);
+    }
+
     return Container(
       padding: const EdgeInsets.only(left: 10, bottom: 20),
       child: Row(
         children: [
-          CircleAvatar(
-            backgroundColor: Colors.grey.withOpacity(0.5),
-            backgroundImage: Image.network(
-                    'https://yt3.ggpht.com/ytc/AAUvwniU0ZOGv47lDdGSQ8H004fQgwOAJRlobuCvXwNl=s48-c-k-c0x00ffffff-no-rj')
-                .image,
+          Obx(
+            () => CircleAvatar(
+              backgroundColor: Colors.grey.withOpacity(0.5),
+              backgroundImage:
+                  Image.network(_videoController.youtuberThumbnailUrl).image,
+            ),
           ),
           SizedBox(width: 15),
           Expanded(
@@ -37,7 +60,7 @@ class VideoWidget extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      video.snippet!.title!,
+                      widget.video.snippet!.title!,
                       maxLines: 2,
                     ),
                   ),
@@ -54,20 +77,22 @@ class VideoWidget extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    video.snippet!.channelTitle!,
+                    widget.video.snippet!.channelTitle!,
                     style: TextStyle(
                         fontSize: 12, color: Colors.black.withOpacity(0.8)),
                   ),
                   Text('·'),
-                  Text(
-                    '조회수 1000회',
-                    style: TextStyle(
-                        fontSize: 12, color: Colors.black.withOpacity(0.6)),
+                  Obx(
+                    () => Text(
+                      _videoController.viewCountString,
+                      style: TextStyle(
+                          fontSize: 12, color: Colors.black.withOpacity(0.6)),
+                    ),
                   ),
                   Text('·'),
                   Text(
                     DateFormat('yyyy-MM-dd')
-                        .format(video.snippet!.publishTime!),
+                        .format(widget.video.snippet!.publishTime!),
                     style: TextStyle(
                         fontSize: 12, color: Colors.black.withOpacity(0.6)),
                   ),

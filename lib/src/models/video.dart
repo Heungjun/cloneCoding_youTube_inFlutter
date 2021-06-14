@@ -81,7 +81,8 @@ class Snippet {
         thumbnails: Thumbnails.fromJson(json["thumbnails"]),
         channelTitle: json["channelTitle"],
         liveBroadcastContent: json["liveBroadcastContent"],
-        publishTime: DateTime.parse(json["publishTime"]),
+        // publishTime: json["publishTime"] ?? DateTime.now(),
+        publishTime: DateTime.now(),
       );
 
   Map<String, dynamic> toJson() => {

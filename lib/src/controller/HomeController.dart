@@ -17,7 +17,7 @@ class HomeController extends GetxController {
     YoutubeVideoResult youtubeVideoResult =
         await YoutubeRepository.to.loadVideos();
 
-    (youtubeVideoResult.items?.length?.isGreaterThan(0) ?? false)
+    (youtubeVideoResult.items?.length.isGreaterThan(0) ?? false)
         ? youtubeResult(youtubeVideoResult)
         : '';
   }
