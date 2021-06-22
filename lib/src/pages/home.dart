@@ -13,6 +13,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Obx(() => CustomScrollView(
+            controller: controller.scrollController,
             slivers: [
               SliverAppBar(
                 title: CustomAppBar(),
@@ -27,9 +28,9 @@ class Home extends StatelessWidget {
                     Get.toNamed('/detail/239587');
                   },
                   child: VideoWidget(
-                      video: controller.youtubeResult.value.items![index]),
+                      video: controller.youtubeResult.value.items[index]),
                 ),
-                childCount: controller.youtubeResult.value.items?.length ?? 0,
+                childCount: controller.youtubeResult.value.items.length,
               )),
             ],
           )),

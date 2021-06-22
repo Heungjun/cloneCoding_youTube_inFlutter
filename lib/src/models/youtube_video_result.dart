@@ -4,10 +4,13 @@ class YoutubeVideoResult {
   int? totalResults;
   int? resultPerPage;
   String? nextPageToken;
-  List<Video>? items;
+  List<Video> items;
 
   YoutubeVideoResult(
-      {this.totalResults, this.resultPerPage, this.nextPageToken, this.items});
+      {this.totalResults,
+      this.resultPerPage,
+      this.nextPageToken,
+      required this.items});
 
   factory YoutubeVideoResult.fromJson(Map<String, dynamic> json) =>
       YoutubeVideoResult(
