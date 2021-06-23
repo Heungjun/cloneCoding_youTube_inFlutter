@@ -31,7 +31,7 @@ class HomeController extends GetxController {
     (youtubeVideoResult.items.length.isGreaterThan(0))
         ? youtubeResult.update((youtube) {
             youtube!.nextPageToken = youtubeVideoResult.nextPageToken;
-            youtube?.items.addAll(youtubeVideoResult.items);
+            youtube.items.addAll(youtubeVideoResult.items);
           })
         : '';
   }

@@ -1,6 +1,7 @@
 import 'package:ccd_youtube_flutter/src/app.dart';
 import 'package:ccd_youtube_flutter/src/binding/init_binding.dart';
 import 'package:ccd_youtube_flutter/src/components/youtube_detail.dart';
+import 'package:ccd_youtube_flutter/src/controller/youtube_detail_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,7 +23,15 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       getPages: [
         GetPage(name: '/', page: () => App()),
-        GetPage(name: '/detail/:videoId', page: () => YoutubeDetail()),
+        GetPage(
+          name: '/detail/:videoId',
+          page: () => YoutubeDetail(),
+          binding: BindingsBuilder(
+            () => Get.lazyPut<YoutubeDetailController>(
+              () => YoutubeDetailController(),
+            ),
+          ),
+        ),
       ],
     );
   }
