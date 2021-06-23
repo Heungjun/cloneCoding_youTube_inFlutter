@@ -27,6 +27,22 @@ class YoutubeRepository extends GetConnect {
     }
   }
 
+  Future<YoutubeVideoResult> search(
+      String searchKeyword, String nextPageToken) async {
+    String url =
+        '/youtube/v3/search?part=snippet&maxResult=10&order=date&type=video&videoDefinition=high&key=AIzaSyBbD9e0IS6Q5ZRieb5HV-KoouyG1tuqNBM&pageToken=$nextPageToken&q=$searchKeyword';
+    final response = await get(url);
+
+    if (response.status.hasError)
+      return Future.error(response.statusText!);
+    else {
+      if (response.body['items'] != null && response.body['items'].length > 0)
+        return YoutubeVideoResult.fromJson(response.body);
+      else
+        return Future.error(response.statusText!);
+    }
+  }
+
   Future<Statistics> getVideoInfoById(String videoId) async {
     String url =
         '/youtube/v3/videos?part=snippet, statistics&key=AIzaSyBbD9e0IS6Q5ZRieb5HV-KoouyG1tuqNBM&id=$videoId';
