@@ -20,59 +20,53 @@ class App extends GetView<AppController> {
           case RouteName.Explore:
             return Explore();
           case RouteName.Add:
-            break;
+            return Container();
           case RouteName.Subscribe:
             return Subscribe();
           case RouteName.Library:
             return Library();
         }
-        return Container();
       }),
       bottomNavigationBar: Obx(
         () => BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
           items: [
             BottomNavigationBarItem(
-              icon: SvgPicture.asset('assets/svg/icons/home_off.svg'),
-              activeIcon: SvgPicture.asset('assets/svg/icons/home_on.svg'),
-              label: '홈',
-            ),
+                icon: SvgPicture.asset('assets/svg/icons/home_off.svg'),
+                activeIcon: SvgPicture.asset('assets/svg/icons/home_on.svg'),
+                label: '홈'),
             BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                'assets/svg/icons/compass_off.svg',
-                width: 22,
-              ),
-              activeIcon: SvgPicture.asset(
-                'assets/svg/icons/compass_on.svg',
-                width: 22,
-              ),
-              label: '탐색',
-            ),
-            BottomNavigationBarItem(
-              icon: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SvgPicture.asset(
-                  'assets/svg/icons/plus.svg',
-                  width: 35,
+                icon: SvgPicture.asset(
+                  'assets/svg/icons/compass_off.svg',
+                  width: 22,
                 ),
-              ),
-              label: '',
-            ),
+                activeIcon: SvgPicture.asset(
+                  'assets/svg/icons/compass_on.svg',
+                  width: 22,
+                ),
+                label: '탐색'),
             BottomNavigationBarItem(
-              icon: SvgPicture.asset('assets/svg/icons/subs_off.svg'),
-              activeIcon: SvgPicture.asset('assets/svg/icons/subs_on.svg'),
-              label: '구독',
-            ),
+                icon: Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: SvgPicture.asset(
+                    'assets/svg/icons/plus.svg',
+                    width: 35,
+                  ),
+                ),
+                label: ''),
             BottomNavigationBarItem(
-              icon: SvgPicture.asset('assets/svg/icons/library_off.svg'),
-              activeIcon: SvgPicture.asset('assets/svg/icons/library_on.svg'),
-              label: '보관함',
-            ),
+                icon: SvgPicture.asset('assets/svg/icons/subs_off.svg'),
+                activeIcon: SvgPicture.asset('assets/svg/icons/subs_on.svg'),
+                label: '구독'),
+            BottomNavigationBarItem(
+                icon: SvgPicture.asset('assets/svg/icons/library_off.svg'),
+                activeIcon: SvgPicture.asset('assets/svg/icons/library_on.svg'),
+                label: '보관함'),
           ],
+          type: BottomNavigationBarType.fixed,
           currentIndex: controller.currentIndex.value,
-          onTap: controller.changePageIndex,
           showSelectedLabels: true,
           selectedItemColor: Colors.black,
+          onTap: (index) => controller.changePageIndex(index),
         ),
       ),
     );

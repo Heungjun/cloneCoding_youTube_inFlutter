@@ -1,5 +1,4 @@
 import 'package:ccd_youtube_flutter/src/components/youtube_bottom_sheet.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 enum RouteName { Home, Explore, Add, Subscribe, Library }
@@ -11,10 +10,12 @@ class AppController extends GetxService {
 
   void changePageIndex(int index) {
     if (RouteName.values[index] == RouteName.Add)
-      _showButtomSheet();
+      _showBottomSheet();
     else
       currentIndex(index);
   }
 
-  void _showButtomSheet() => Get.bottomSheet(YoutubeBottomSheet());
+  void _showBottomSheet() {
+    Get.bottomSheet(YoutubeBottomSheet());
+  }
 }
