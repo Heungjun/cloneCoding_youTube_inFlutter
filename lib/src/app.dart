@@ -1,4 +1,5 @@
 import 'package:ccd_youtube_flutter/src/controller/app_controller.dart';
+import 'package:ccd_youtube_flutter/src/controller/home_controller.dart';
 import 'package:ccd_youtube_flutter/src/pages/explore.dart';
 import 'package:ccd_youtube_flutter/src/pages/home.dart';
 import 'package:ccd_youtube_flutter/src/pages/library.dart';
@@ -16,7 +17,9 @@ class App extends GetView<AppController> {
       body: Obx(() {
         switch (RouteName.values[controller.currentIndex.value]) {
           case RouteName.Home:
-            return Home();
+            return Home(
+              controller: Get.put(HomeController()),
+            );
           case RouteName.Explore:
             return Explore();
           case RouteName.Add:

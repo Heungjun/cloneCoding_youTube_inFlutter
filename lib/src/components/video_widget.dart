@@ -1,7 +1,10 @@
+import 'package:ccd_youtube_flutter/src/models/video.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class VideoWidget extends StatelessWidget {
-  const VideoWidget({Key? key}) : super(key: key);
+  const VideoWidget({Key? key, required this.video}) : super(key: key);
+  final Video video;
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +19,10 @@ class VideoWidget extends StatelessWidget {
     return Container(
       height: 250,
       color: Colors.grey.withOpacity(0.5),
+      child: Image.network(
+        video.snippet.thumbnails.medium.url,
+        fit: BoxFit.fitWidth,
+      ),
     );
   }
 
@@ -39,7 +46,7 @@ class VideoWidget extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        '개남 유튜브 다시보기',
+                        video.snippet.title,
                         maxLines: 2,
                       ),
                     ),
@@ -55,7 +62,7 @@ class VideoWidget extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      '개발하는 남자',
+                      video.snippet.channelTitle,
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.black.withOpacity(0.8),
@@ -71,7 +78,8 @@ class VideoWidget extends StatelessWidget {
                     ),
                     Text('ㆍ'),
                     Text(
-                      '2021-02-13',
+                      DateFormat('yyyy-MM-dd')
+                          .format(video.snippet.publishTime),
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.black.withOpacity(0.6),
