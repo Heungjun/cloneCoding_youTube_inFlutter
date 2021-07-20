@@ -83,7 +83,7 @@ class Snippet {
     required this.thumbnails,
     required this.channelTitle,
     required this.liveBroadcastContent,
-    required this.publishTime,
+    this.publishTime,
   });
 
   final DateTime publishedAt;
@@ -93,7 +93,7 @@ class Snippet {
   final Thumbnails thumbnails;
   final String channelTitle;
   final String liveBroadcastContent;
-  final DateTime publishTime;
+  final DateTime? publishTime;
 
   Snippet copyWith({
     DateTime? publishedAt,
@@ -124,7 +124,9 @@ class Snippet {
         thumbnails: Thumbnails.fromJson(json["thumbnails"]),
         channelTitle: json["channelTitle"],
         liveBroadcastContent: json["liveBroadcastContent"],
-        publishTime: DateTime.parse(json["publishTime"]),
+        publishTime: json["publishTime"] == null
+            ? DateTime.now()
+            : DateTime.parse(json["publishTime"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -135,7 +137,7 @@ class Snippet {
         "thumbnails": thumbnails.toJson(),
         "channelTitle": channelTitle,
         "liveBroadcastContent": liveBroadcastContent,
-        "publishTime": publishTime.toIso8601String(),
+        "publishTime": publishTime?.toIso8601String(),
       };
 }
 
