@@ -15,6 +15,7 @@ class Home extends StatelessWidget {
         () => controller.isInit.value == false
             ? LinearProgressIndicator()
             : CustomScrollView(
+                controller: controller.scrollController,
                 slivers: [
                   SliverAppBar(
                     title: CustomAppBar(),

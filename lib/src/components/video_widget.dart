@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ccd_youtube_flutter/src/controller/video_controller.dart';
 import 'package:ccd_youtube_flutter/src/models/video.dart';
 import 'package:flutter/material.dart';
@@ -33,13 +34,25 @@ class _VideoWidgetState extends State<VideoWidget> {
   }
 
   _thumbnail() {
-    return Container(
-      height: 250,
-      color: Colors.grey.withOpacity(0.5),
-      child: Image.network(
-        widget.video.snippet.thumbnails.medium.url,
-        fit: BoxFit.fitWidth,
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Container(
+          color: Colors.grey.withOpacity(0.5),
+          // child: Image.network(
+          //   widget.video.snippet.thumbnails.medium.url,
+          //   fit: BoxFit.fitWidth,
+          // ),
+          child: CachedNetworkImage(
+            imageUrl: _videoController.youtuberThumbnailUrl,
+            placeholder: (context, url) => Container(
+              height: 230,
+              child: Center(child: CircularProgressIndicator()),
+            ),
+            fit: BoxFit.fitWidth,
+          ),
+        ),
+      ],
     );
   }
 
